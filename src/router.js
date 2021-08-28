@@ -7,6 +7,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Login from './Login';
+import Dashboard from './Dashboard';
 
 export default function Routes() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -14,14 +15,21 @@ export default function Routes() {
   return (
     <Router>
       <nav>
-        <Link to="/">
+        <Link to="/dashboard">
           <h1>Nico's Blog (author)</h1>
         </Link>
       </nav>
       <Switch>
-        <Route path="/">
-          {loggedIn ? (
+        <Route path="/" exact>
+          {loggedIn || localStorage.getItem('token') ? (
             <Redirect to="/dashboard" />
+          ) : (
+            <Login signal={setLoggedIn} />
+          )}
+        </Route>
+        <Route path="/dashboard" exact>
+          {loggedIn || localStorage.getItem('token') ? (
+            <Dashboard />
           ) : (
             <Login signal={setLoggedIn} />
           )}
