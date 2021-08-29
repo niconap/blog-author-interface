@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import DashboardArticle from './DashboardArticle';
+import ArticleForm from './ArticleForm';
 
 export default function Dashboard(params) {
   const [user, setUser] = useState({});
   const [error, setError] = useState('');
   const [loaded, setLoaded] = useState(false);
   const [articles, setArticles] = useState([]);
+  const [newArticle, setNewArticle] = useState(false);
 
   useEffect(() => {
     fetch('https://www.niconap.ga/blog/currentuser', {
@@ -39,6 +41,14 @@ export default function Dashboard(params) {
       });
   }, []);
 
+  function pushArticle(article) {
+    setArticles([...articles, article]);
+  }
+
+  function switchNewArticle() {
+    newArticle ? setNewArticle(false) : setNewArticle(true);
+  }
+
   if (!loaded) {
     return <h2>Loading...</h2>;
   } else if (error) {
@@ -52,16 +62,15 @@ export default function Dashboard(params) {
     return (
       <div>
         <h2>Welcome {user.authData.firstname}!</h2>
+        <label htmlFor="new">{newArticle ? 'Cancel' : 'New article'}</label>
+        <button onClick={switchNewArticle} name="new" id="new">
+          {newArticle ? '-' : '+'}
+        </button>
+        {newArticle ? <ArticleForm push={pushArticle} /> : ''}
         <h3>Currently these are all of your articles:</h3>
         <ul>
           {articles.map((article) => {
-            return (
-              <li className="article" key={article._id}>
-                <Link to={'/article/' + article._id}>
-                  <h4>{article.title}</h4>
-                </Link>
-              </li>
-            );
+            return <DashboardArticle key={article._id} data={article} />;
           })}
         </ul>
       </div>
