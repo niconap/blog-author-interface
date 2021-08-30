@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;700&display=swap');
+
+body {
+  margin: auto;
+  font-family: Jost, Arial, sans-serif;
+  outline: none;
+  padding: 1em;
+}
+
+.pagetitle {
+  color: black;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  padding: 0.5em;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+}
+
+button:hover {
+  cursor: pointer;
+  filter: brightness(0.9);
+  box-shadow: 0px 0px 5px lightgray;
+}
+
+button:active {
+  box-shadow: none;
+}
+
+#logout {
+  background-color: var(--green);
+  border-radius: 50px;
+  width: 3em;
+}
+
+#login {
+  background-color: var(--red);
+  border-radius: 50px;
+  width: 3em;
+}
+
+#new {
+  background-color: var(--blue);
+  border-radius: 50px;
+  width: 3em;
+}
+
+#articles,
+.comment {
+  padding: 2em;
+}
+
+#articles li,
+.comment {
+  display: inline-block;
+  background-color: rgb(243, 243, 243);
+  padding: 1.5em;
+  border-radius: 10px;
+  margin-right: 2em;
+}
+
+#articles li a {
+  color: black;
+}
+
+.articlebuttons,
+.commentbuttons,
+#loginbuttons {
+  display: flex;
+  justify-content: center;
+}
+
+#loginform {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: rgb(243, 243, 243);
+  padding: 1.5em;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#loginform input {
+  background: none;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: 2px solid black;
+  outline: none;
+  display: block;
+  margin: 1em 0em;
+}
+
+:root {
+  --blue: rgb(88, 88, 255);
+  --red: rgb(255, 88, 88);
+  --green: rgb(103, 255, 57);
+  --yellow: rgb(255, 235, 57);
+}

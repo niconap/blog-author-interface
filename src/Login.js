@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
 
 export default function Login(params) {
   const [username, setUsername] = useState('');
@@ -58,7 +59,11 @@ export default function Login(params) {
             value={password}
             onChange={handlePasswordChange}
           />
-          <button>Log in</button>
+          <div id="loginbuttons">
+            <button id="login">
+              <CheckRoundedIcon />
+            </button>
+          </div>
           <p id="message">{message}</p>
         </form>
       </div>

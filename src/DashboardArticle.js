@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import DeleteRoundedIcon from '@material-ui/icons/Delete';
 import CloseRoundedIcon from '@material-ui/icons/Close';
+import PublicRoundedIcon from '@material-ui/icons/PublicRounded';
+import LockRoundedIcon from '@material-ui/icons/LockRounded';
 
 export default function DashboardArticle(params) {
   let { data } = params;
@@ -94,24 +96,33 @@ export default function DashboardArticle(params) {
             minute: 'numeric',
           })}
         </p>
-        {!data.public && !publicized ? (
-          <button onClick={publicizeArticle}>Publicize</button>
-        ) : (
-          ''
-        )}
-        {data.public && publicized ? (
-          <button onClick={privatizeArticle}>Privatize</button>
-        ) : (
-          ''
-        )}
-        <button onClick={changeDelete}>
-          {confirmDelete ? <CloseRoundedIcon /> : <DeleteRoundedIcon />}
-        </button>
-        {confirmDelete ? <p>Are you sure?</p> : ''}
-        {confirmDelete ? <button onClick={deleteArticle}>Confirm</button> : ''}
+        <div className="articlebuttons">
+          {!data.public && !publicized ? (
+            <button onClick={publicizeArticle}>
+              <PublicRoundedIcon />
+            </button>
+          ) : (
+            ''
+          )}
+          {data.public && publicized ? (
+            <button onClick={privatizeArticle}>
+              <LockRoundedIcon />
+            </button>
+          ) : (
+            ''
+          )}
+          <button onClick={changeDelete}>
+            {confirmDelete ? <CloseRoundedIcon /> : <DeleteRoundedIcon />}
+          </button>
+          {confirmDelete ? (
+            <button onClick={deleteArticle}>Confirm</button>
+          ) : (
+            ''
+          )}
+        </div>
       </li>
     );
   } else {
-    return <h4 id="deletemessage">"{data.title}" has been deleted!</h4>;
+    return '';
   }
 }

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DashboardArticle from './DashboardArticle';
 import ArticleForm from './ArticleForm';
+import AddRoundedIcon from '@material-ui/icons/Add';
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 
 export default function Dashboard(params) {
   const [user, setUser] = useState({});
@@ -49,6 +52,11 @@ export default function Dashboard(params) {
     newArticle ? setNewArticle(false) : setNewArticle(true);
   }
 
+  function logOut() {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  }
+
   if (!loaded) {
     return <h2>Loading...</h2>;
   } else if (error) {
@@ -62,13 +70,15 @@ export default function Dashboard(params) {
     return (
       <div>
         <h2>Welcome {user.authData.firstname}!</h2>
-        <label htmlFor="new">{newArticle ? 'Cancel' : 'New article'}</label>
+        <button id="logout" onClick={logOut}>
+          <ExitToAppRoundedIcon />
+        </button>
+        <h3>Currently these are all of your articles:</h3>
         <button onClick={switchNewArticle} name="new" id="new">
-          {newArticle ? '-' : '+'}
+          {newArticle ? <CloseRoundedIcon /> : <AddRoundedIcon />}
         </button>
         {newArticle ? <ArticleForm push={pushArticle} /> : ''}
-        <h3>Currently these are all of your articles:</h3>
-        <ul>
+        <ul id="articles">
           {articles.map((article) => {
             return <DashboardArticle key={article._id} data={article} />;
           })}

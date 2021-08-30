@@ -17,7 +17,7 @@ export default function Routes() {
     <Router>
       <nav>
         <Link to="/dashboard">
-          <h1>Nico's Blog (author)</h1>
+          <h1 className="pagetitle">Nico's Blog (author)</h1>
         </Link>
       </nav>
       <Switch>
@@ -36,7 +36,11 @@ export default function Routes() {
           )}
         </Route>
         <Route path="/article/:id">
-          <ArticleDetail />
+          {loggedIn || localStorage.getItem('token') ? (
+            <ArticleDetail />
+          ) : (
+            <Login signal={setLoggedIn} />
+          )}
         </Route>
       </Switch>
     </Router>

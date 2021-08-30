@@ -46,10 +46,16 @@ export default function Comment(params) {
             minute: 'numeric',
           })}
         </p>
-        <button onClick={changeCommentDelete}>
-          {commentDelete ? <CloseRoundedIcon /> : <DeleteRoundedIcon />}
-        </button>
-        {commentDelete ? <button onClick={deleteComment}>Confirm</button> : ''}
+        <div className="commentbuttons">
+          <button onClick={changeCommentDelete}>
+            {commentDelete ? <CloseRoundedIcon /> : <DeleteRoundedIcon />}
+          </button>
+          {commentDelete ? (
+            <button onClick={deleteComment}>Confirm</button>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
     );
   } else {
