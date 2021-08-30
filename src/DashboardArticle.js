@@ -8,7 +8,7 @@ export default function DashboardArticle(params) {
   let { data } = params;
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleted, setDeleted] = useState(false);
-  const [publicized, setPublicized] = useState(false);
+  const [publicized, setPublicized] = useState(data.public);
 
   function changeDelete() {
     if (confirmDelete) {
@@ -35,6 +35,28 @@ export default function DashboardArticle(params) {
       .catch((error) => console.log(error));
   }
 
+  function privatizeArticle() {
+    fetch(`https://www.niconap.ga/blog/posts/${data._id}`, {
+      mode: 'cors',
+      method: 'PUT',
+      headers: {
+        Authorization: localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: data.title,
+        content: data.content,
+        public: false,
+      }),
+    })
+      .then((response) => response.json())
+      .then((results) => {
+        data.public = false;
+        setPublicized(false);
+      })
+      .catch((error) => console.log(error));
+  }
+
   function publicizeArticle() {
     fetch(`https://www.niconap.ga/blog/posts/${data._id}`, {
       mode: 'cors',
@@ -50,7 +72,10 @@ export default function DashboardArticle(params) {
       }),
     })
       .then((response) => response.json())
-      .then((results) => setPublicized(true))
+      .then((results) => {
+        data.public = true;
+        setPublicized(true);
+      })
       .catch((error) => console.log(error));
   }
 
@@ -71,6 +96,11 @@ export default function DashboardArticle(params) {
         </p>
         {!data.public && !publicized ? (
           <button onClick={publicizeArticle}>Publicize</button>
+        ) : (
+          ''
+        )}
+        {data.public && publicized ? (
+          <button onClick={privatizeArticle}>Privatize</button>
         ) : (
           ''
         )}
