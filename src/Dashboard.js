@@ -13,19 +13,24 @@ export default function Dashboard(params) {
   const [newArticle, setNewArticle] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     fetch('https://www.niconap.ga/blog/currentuser', {
       mode: 'cors',
       headers: {
         Authorization: localStorage.getItem('token'),
       },
+      signal,
     })
       .then((response) => response.json())
       .then((results) => {
         setUser(results);
+        controller.abort();
       })
       .catch((error) => {
         setError(error);
         setLoaded(true);
+        controller.abort();
       });
     fetch('https://www.niconap.ga/blog/posts/private', {
       mode: 'cors',
