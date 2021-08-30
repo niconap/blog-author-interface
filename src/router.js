@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import ArticleDetail from './ArticleDetail';
 
 export default function Routes() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -33,6 +34,9 @@ export default function Routes() {
           ) : (
             <Login signal={setLoggedIn} />
           )}
+        </Route>
+        <Route path="/article/:id">
+          <ArticleDetail />
         </Route>
       </Switch>
     </Router>
