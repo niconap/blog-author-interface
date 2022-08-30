@@ -10,7 +10,7 @@ export default function Login(params) {
 
   function logInCall(e) {
     e.preventDefault();
-    fetch('https://www.niconap.ga/auth/login', {
+    fetch('http://localhost:3000/auth/login', {
       mode: 'cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

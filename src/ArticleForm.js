@@ -9,7 +9,7 @@ export default function ArticleForm(params) {
 
   function submitForm(e) {
     e.preventDefault();
-    fetch('https://www.niconap.ga/blog/posts', {
+    fetch('http://localhost:3000/blog/posts', {
       mode: 'cors',
       method: 'POST',
       headers: {

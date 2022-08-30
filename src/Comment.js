@@ -14,7 +14,7 @@ export default function Comment(params) {
 
   function deleteComment() {
     fetch(
-      `https://www.niconap.ga/blog/posts/${params.articleId}/comments/${data._id}`,
+      `http://localhost:3000/blog/posts/${params.articleId}/comments/${data._id}`,
       {
         mode: 'cors',
         method: 'DELETE',

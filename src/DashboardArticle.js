@@ -21,7 +21,7 @@ export default function DashboardArticle(params) {
   }
 
   function deleteArticle() {
-    fetch(`https://www.niconap.ga/blog/posts/${data._id}`, {
+    fetch(`http://localhost:3000/blog/posts/${data._id}`, {
       mode: 'cors',
       method: 'DELETE',
       headers: {
@@ -38,7 +38,7 @@ export default function DashboardArticle(params) {
   }
 
   function privatizeArticle() {
-    fetch(`https://www.niconap.ga/blog/posts/${data._id}`, {
+    fetch(`http://localhost:3000/blog/posts/${data._id}`, {
       mode: 'cors',
       method: 'PUT',
       headers: {
@@ -60,7 +60,7 @@ export default function DashboardArticle(params) {
   }
 
   function publicizeArticle() {
-    fetch(`https://www.niconap.ga/blog/posts/${data._id}`, {
+    fetch(`http://localhost:3000/blog/posts/${data._id}`, {
       mode: 'cors',
       method: 'PUT',
       headers: {
