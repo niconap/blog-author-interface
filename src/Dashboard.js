@@ -15,7 +15,7 @@ export default function Dashboard(params) {
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
-    fetch('http://localhost:3000/blog/currentuser', {
+    fetch('/blog/currentuser', {
       mode: 'cors',
       headers: {
         Authorization: localStorage.getItem('token'),
@@ -32,7 +32,7 @@ export default function Dashboard(params) {
         setLoaded(true);
         controller.abort();
       });
-    fetch('http://localhost:3000/blog/posts/private', {
+    fetch('/blog/posts/private', {
       mode: 'cors',
       headers: {
         Authorization: localStorage.getItem('token'),

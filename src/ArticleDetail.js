@@ -14,7 +14,7 @@ function ArticleDetail() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/blog/posts/${id}`, {
+    fetch(`/blog/posts/${id}`, {
       mode: 'cors',
       method: 'GET',
     })
@@ -40,7 +40,7 @@ function ArticleDetail() {
         console.log(error);
         setIsLoaded(true);
       });
-    fetch(`http://localhost:3000/blog/posts/${id}/comments`, {
+    fetch(`/blog/posts/${id}/comments`, {
       mode: 'cors',
       method: 'GET',
     })
