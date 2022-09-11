@@ -59,7 +59,7 @@ export default function Dashboard(params) {
 
   function logOut() {
     localStorage.removeItem('token');
-    window.location.href = '/';
+    window.location.href = '/author-frontend';
   }
 
   if (!loaded) {

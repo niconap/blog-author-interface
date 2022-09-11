@@ -84,7 +84,7 @@ export default function DashboardArticle(params) {
   if (!deleted) {
     return (
       <li className="article" key={data._id}>
-        <Link to={'/article/' + data._id}>
+        <Link to={'/author-frontend/article/' + data._id}>
           <h4>{data.title}</h4>
         </Link>
         <p>
