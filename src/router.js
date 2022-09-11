@@ -16,26 +16,26 @@ export default function Routes() {
   return (
     <Router>
       <nav>
-        <Link to="/dashboard">
+        <Link to="/author-frontend/dashboard">
           <h1 className="pagetitle">Nico's Blog (author)</h1>
         </Link>
       </nav>
       <Switch>
-        <Route path="/" exact>
+        <Route path="/author-frontend" exact>
           {loggedIn || localStorage.getItem('token') ? (
-            <Redirect to="/dashboard" />
+            <Redirect to="/author-frontend/dashboard" />
           ) : (
             <Login signal={setLoggedIn} />
           )}
         </Route>
-        <Route path="/dashboard" exact>
+        <Route path="/author-frontend/dashboard" exact>
           {loggedIn || localStorage.getItem('token') ? (
             <Dashboard />
           ) : (
             <Login signal={setLoggedIn} />
           )}
         </Route>
-        <Route path="/article/:id">
+        <Route path="/author-frontend/article/:id">
           {loggedIn || localStorage.getItem('token') ? (
             <ArticleDetail />
           ) : (
