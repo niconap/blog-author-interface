@@ -83,6 +83,7 @@ export default function ArticleForm(params) {
 
   return (
     <form id="articleform" onSubmit={submitForm}>
+      <h2>{params.edit ? 'Editor' : 'Create a new post'}</h2>
       <input
         type="text"
         name="title"
