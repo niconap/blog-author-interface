@@ -66,6 +66,10 @@ export default function Login(params) {
           </div>
           <p id="message">{message}</p>
         </form>
+        <p>
+          Don't have an account? Sign up{' '}
+          <a href="/author-frontend/signup">here</a>!
+        </p>
       </div>
     );
   } else if (error) {

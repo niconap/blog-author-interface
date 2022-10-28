@@ -40,7 +40,15 @@ button:active {
 #logout {
   background-color: var(--green);
   border-radius: 50px;
-  width: 3em;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+#deleteaccount {
+  background-color: var(--red);
+  border-radius: 50px;
+  padding: 1em;
+  margin: 1em 0;
 }
 
 #login {
@@ -93,6 +101,7 @@ button:active {
   text-align: center;
 }
 
+
 #loginform input {
   background: none;
   border-right: none;
@@ -101,6 +110,7 @@ button:active {
   border-bottom: 2px solid black;
   outline: none;
   display: block;
+  width: 100%;
   margin: 1em 0em;
 }
 

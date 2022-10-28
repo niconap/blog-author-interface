@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import uniqid from 'uniqid';
 
 export default function ArticleForm(params) {
   const [title, setTitle] = useState('');
@@ -74,7 +75,7 @@ export default function ArticleForm(params) {
       <button>Post</button>
       <ul>
         {errors.map((error) => {
-          return <li>{error.msg}</li>;
+          return <li key={uniqid()}>{error.msg}</li>;
         })}
       </ul>
       {success}

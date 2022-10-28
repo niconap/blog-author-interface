@@ -4,6 +4,7 @@ import ArticleForm from './ArticleForm';
 import AddRoundedIcon from '@material-ui/icons/Add';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function Dashboard(params) {
   const [user, setUser] = useState({});
@@ -11,6 +12,37 @@ export default function Dashboard(params) {
   const [loaded, setLoaded] = useState(false);
   const [articles, setArticles] = useState([]);
   const [newArticle, setNewArticle] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [message, setMessage] = useState('');
+
+  function handleDelete() {
+    if (confirmDelete) {
+      fetch(`http://localhost:3000/blog/authors/${user.authData._id}`, {
+        mode: 'cors',
+        method: 'DELETE',
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+      })
+        .then((response) => response.json())
+        .then((results) => {
+          console.log(results);
+          if (results.error) {
+            setError(error);
+          } else if (!results.author) {
+            setMessage(results.message);
+          } else {
+            logOut();
+          }
+        })
+        .catch((error) => {
+          setError(error);
+          setLoaded(true);
+        });
+    }
+    setTimeout(() => setConfirmDelete(false), 3000);
+    setConfirmDelete(true);
+  }
 
   useEffect(() => {
     const controller = new AbortController();
@@ -76,8 +108,13 @@ export default function Dashboard(params) {
       <div>
         <h2>Welcome {user.authData.firstname}!</h2>
         <button id="logout" onClick={logOut}>
-          <ExitToAppRoundedIcon />
+          <ExitToAppRoundedIcon /> Log out
         </button>
+        <button id="deleteaccount" onClick={handleDelete}>
+          <DeleteIcon />
+          {confirmDelete ? 'Confirm' : 'Delete account'}
+        </button>
+        <p>{message}</p>
         <h3>Currently these are all of your articles:</h3>
         <button onClick={switchNewArticle} name="new" id="new">
           {newArticle ? <CloseRoundedIcon /> : <AddRoundedIcon />}

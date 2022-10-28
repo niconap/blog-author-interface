@@ -76,7 +76,7 @@ export default function SignUp(params) {
 
   if (!logIn) {
     return (
-      <div id="signup">
+      <div id="loginform">
         <h2>Let's sign you up!</h2>
         <form onSubmit={signupCall}>
           <input
@@ -119,6 +119,10 @@ export default function SignUp(params) {
                 })
               : ''}
           </ul>
+          <p>
+            Already have an account? Log in <a href="/author-frontend/">here</a>
+            !
+          </p>
         </form>
       </div>
     );
