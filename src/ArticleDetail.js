@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { DateTime } from 'luxon';
 import Comment from './Comment';
+import EditIcon from '@mui/icons-material/Edit';
+import ArticleForm from './ArticleForm';
 
 function ArticleDetail() {
   const [title, setTitle] = useState('');
@@ -11,6 +13,7 @@ function ArticleDetail() {
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [edit, setEdit] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -40,7 +43,7 @@ function ArticleDetail() {
         console.log(error);
         setIsLoaded(true);
       });
-    fetch(`/blog/posts/${id}/comments`, {
+    fetch(`http://localhost:3000/blog/posts/${id}/comments`, {
       mode: 'cors',
       method: 'GET',
     })
@@ -71,19 +74,47 @@ function ArticleDetail() {
         <h1>Loading content...</h1>
       </div>
     );
-  } else {
+  } else if (!edit) {
     return (
       <div id="container">
         <div id="content">
           <h1>{title}</h1>
+          <button onClick={() => setEdit(!edit)} id="editbutton">
+            <EditIcon /> Edit
+          </button>
           <h2>{author}</h2>
           <h4>Posted on {timestamp}</h4>
           <p id="articletext">{content}</p>
         </div>
         <div id="comments">
-          {comments.map((comment) => {
-            return <Comment key={comment._id} articleId={id} data={comment} />;
-          })}
+          <h2>Comments</h2>
+          {comments.length > 0
+            ? comments.map((comment) => {
+                return (
+                  <Comment key={comment._id} articleId={id} data={comment} />
+                );
+              })
+            : 'Currently there are no comments'}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div id="container">
+        <div id="content">
+          <h1>You're currently editing "{title}"</h1>
+          <button onClick={() => setEdit(!edit)} id="editbutton">
+            <EditIcon /> Cancel edit
+          </button>
+          <ArticleForm
+            title={title}
+            setEdit={setEdit}
+            setTitle={setTitle}
+            setContent={setContent}
+            edit={true}
+            id={id}
+            content={content}
+          />
         </div>
       </div>
     );
