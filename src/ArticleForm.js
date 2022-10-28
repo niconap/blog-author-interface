@@ -82,7 +82,7 @@ export default function ArticleForm(params) {
   }
 
   return (
-    <form onSubmit={submitForm}>
+    <form id="articleform" onSubmit={submitForm}>
       <input
         type="text"
         name="title"
@@ -96,7 +96,7 @@ export default function ArticleForm(params) {
         onChange={handleContentChange}
         value={content}
       ></textarea>
-      <label htmlFor="public">Private:</label>
+      <label htmlFor="public">Is this post private?</label>
       <input
         type="checkbox"
         name="public"
