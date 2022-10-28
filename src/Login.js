@@ -10,7 +10,7 @@ export default function Login(params) {
 
   function logInCall(e) {
     e.preventDefault();
-    fetch('/auth/login', {
+    fetch('http://localhost:3000/auth/login', {
       mode: 'cors',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -43,7 +43,7 @@ export default function Login(params) {
   if (!logIn) {
     return (
       <div id="loginform">
-        <h3>Log in</h3>
+        <h3>Welcome back! Log in</h3>
         <form onSubmit={logInCall}>
           <input
             type="text"

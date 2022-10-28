@@ -9,6 +9,7 @@ import {
 import Login from './Login';
 import Dashboard from './Dashboard';
 import ArticleDetail from './ArticleDetail';
+import SignUp from './SignUp';
 
 export default function Routes() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,6 +27,13 @@ export default function Routes() {
             <Redirect to="/author-frontend/dashboard" />
           ) : (
             <Login signal={setLoggedIn} />
+          )}
+        </Route>
+        <Route path="/author-frontend/signup" exact>
+          {loggedIn || localStorage.getItem('token') ? (
+            <Redirect to="/author-frontend/dashboard" />
+          ) : (
+            <SignUp signal={setLoggedIn} />
           )}
         </Route>
         <Route path="/author-frontend/dashboard" exact>

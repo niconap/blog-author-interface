@@ -13,13 +13,16 @@ export default function Comment(params) {
   }
 
   function deleteComment() {
-    fetch(`/blog/posts/${params.articleId}/comments/${data._id}`, {
-      mode: 'cors',
-      method: 'DELETE',
-      headers: {
-        Authorization: localStorage.getItem('token'),
-      },
-    })
+    fetch(
+      `http://localhost:3000/blog/posts/${params.articleId}/comments/${data._id}`,
+      {
+        mode: 'cors',
+        method: 'DELETE',
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    )
       .then((response) => response.json())
       .then((results) => {
         if (results.message) {
